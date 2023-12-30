@@ -11,7 +11,15 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-
+      - name: Set up secret file
+        env:
+          WEREAD_COOKIE: ${{ secrets.WEREAD_COOKIE }}
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+          NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}
+        run: |
+          echo $WEREAD_COOKIE >> secrets.txt
+          echo $NOTION_TOKEN >> secrets.txt
+          echo $NOTION_DATABASE_ID >> secrets.txt
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
